@@ -1,0 +1,24 @@
+<?php
+
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MedicalCaseController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Everything inside this group needs a logged-in user (guests go to /login).
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // One line creates index, create, store, show, edit, update, destroy routes.
+    Route::resource('cases', MedicalCaseController::class);
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
