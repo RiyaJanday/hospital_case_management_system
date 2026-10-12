@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\Gate;
 
 class MedicalCaseController extends Controller
 {
-    // Case list with search, status filter and pagination (10 per page).
     public function index(Request $request)
     {
         Gate::authorize('viewAny', MedicalCase::class);
 
         $query = MedicalCase::query();
 
-        // Search by case number OR surgeon name.
         $search = $request->input('search');
         if ($search) {
             $query->where(function ($subQuery) use ($search) {
@@ -25,13 +23,11 @@ class MedicalCaseController extends Controller
             });
         }
 
-        // Filter by status.
         $status = $request->input('status');
         if ($status) {
             $query->where('status', $status);
         }
 
-        // withQueryString keeps the search/filter when moving between pages.
         $cases = $query->orderBy('id', 'desc')->paginate(10)->withQueryString();
 
         return view('cases.index', ['cases' => $cases]);
@@ -41,7 +37,6 @@ class MedicalCaseController extends Controller
     {
         Gate::authorize('create', MedicalCase::class);
 
-        // An empty case so the shared form fields have something to read from.
         return view('cases.create', ['case' => new MedicalCase()]);
     }
 
@@ -49,7 +44,6 @@ class MedicalCaseController extends Controller
     {
         Gate::authorize('create', MedicalCase::class);
 
-        // validated() returns only the fields that passed validation.
         $data = $request->validated();
         $data['created_by'] = $request->user()->id;
 
@@ -83,7 +77,6 @@ class MedicalCaseController extends Controller
 
     public function destroy(MedicalCase $case)
     {
-        // The server blocks Viewers here even if they send the request by hand.
         Gate::authorize('delete', $case);
 
         $case->delete();

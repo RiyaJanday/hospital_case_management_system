@@ -4,10 +4,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MedicalCaseController;
 use Illuminate\Support\Facades\Route;
 
-// Laravel adds the /api prefix automatically.
 Route::post('/login', [AuthController::class, 'login']);
 
-// auth:sanctum means "a valid token is required".
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 

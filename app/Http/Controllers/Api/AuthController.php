@@ -10,12 +10,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // POST /api/login -> returns a Sanctum token.
     public function login(ApiLoginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
 
-        // Hash::check compares the typed password with the stored hash.
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'success' => false,
@@ -36,7 +34,6 @@ class AuthController extends Controller
         ], 200);
     }
 
-    // POST /api/logout -> deletes the token that made this request.
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

@@ -7,7 +7,7 @@
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm rounded-lg p-6">
                 <form method="POST" action="{{ route('cases.store') }}">
-                    @csrf {{-- CSRF token: protects the form from forged requests --}}
+                    @csrf
 
                     @include('cases._fields')
 

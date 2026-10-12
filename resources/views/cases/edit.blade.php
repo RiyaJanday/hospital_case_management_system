@@ -8,7 +8,7 @@
             <div class="bg-white shadow-sm rounded-lg p-6">
                 <form method="POST" action="{{ route('cases.update', $case) }}">
                     @csrf
-                    @method('PUT') {{-- browsers only send GET/POST, so we "pretend" to send PUT --}}
+                    @method('PUT')
 
                     @include('cases._fields')
 

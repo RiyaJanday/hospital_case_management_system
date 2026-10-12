@@ -1,6 +1,3 @@
-{{-- Form fields shared by the create and edit pages. --}}
-{{-- $case is a MedicalCase (empty on create, filled on edit). old() keeps typed values after an error. --}}
-
 <div class="mb-4">
     <label for="case_number" class="block font-medium text-sm text-gray-700">Case Number</label>
     <input type="text" id="case_number" name="case_number" placeholder="CASE-0001"

@@ -15,16 +15,14 @@ class MedicalCaseRequest extends FormRequest
 
     public function rules(): array
     {
-        // When editing, the URL contains the case. We ignore that case in the unique check.
-        // On the web the route value is a MedicalCase object, in the API it is a plain id.
         $routeValue = $this->route('case');
         if ($routeValue === null) {
-            $routeValue = $this->route('id'); // the API routes use {id}
+            $routeValue = $this->route('id');
         }
         if ($routeValue instanceof MedicalCase) {
             $currentCaseId = $routeValue->id;
         } else {
-            $currentCaseId = $routeValue; // null when creating
+            $currentCaseId = $routeValue;
         }
 
         return [

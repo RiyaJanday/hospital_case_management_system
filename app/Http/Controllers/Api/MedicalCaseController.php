@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Gate;
 
 class MedicalCaseController extends Controller
 {
-    // GET /api/cases
     public function index()
     {
         Gate::authorize('viewAny', MedicalCase::class);
@@ -19,7 +18,6 @@ class MedicalCaseController extends Controller
         return $this->respond(true, $cases, 'Cases retrieved.', 200);
     }
 
-    // POST /api/cases
     public function store(MedicalCaseRequest $request)
     {
         Gate::authorize('create', MedicalCase::class);
@@ -32,7 +30,6 @@ class MedicalCaseController extends Controller
         return $this->respond(true, $case, 'Case created.', 201);
     }
 
-    // GET /api/cases/{id}
     public function show($id)
     {
         $case = MedicalCase::find($id);
@@ -45,7 +42,6 @@ class MedicalCaseController extends Controller
         return $this->respond(true, $case, 'Case retrieved.', 200);
     }
 
-    // PUT /api/cases/{id}
     public function update(MedicalCaseRequest $request, $id)
     {
         $case = MedicalCase::find($id);
@@ -60,7 +56,6 @@ class MedicalCaseController extends Controller
         return $this->respond(true, $case, 'Case updated.', 200);
     }
 
-    // DELETE /api/cases/{id}
     public function destroy($id)
     {
         $case = MedicalCase::find($id);
@@ -75,7 +70,6 @@ class MedicalCaseController extends Controller
         return $this->respond(true, null, 'Case deleted.', 200);
     }
 
-    // Every response has the same shape: success, data, message.
     private function respond($success, $data, $message, $statusCode)
     {
         return response()->json([

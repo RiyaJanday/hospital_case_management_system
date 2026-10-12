@@ -7,12 +7,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm rounded-lg p-6">
 
-                {{-- Success message after create / update / delete --}}
                 @if (session('success'))
                     <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">{{ session('success') }}</div>
                 @endif
 
-                {{-- Search and filter form (uses GET so the URL can be shared) --}}
                 <form method="GET" action="{{ route('cases.index') }}" class="flex flex-col sm:flex-row gap-2 mb-4">
                     <input type="text" name="search" value="{{ request('search') }}"
                            placeholder="Case number or surgeon"
@@ -31,13 +29,11 @@
                     <a href="{{ route('cases.index') }}" class="px-4 py-2 border rounded-md text-center">Reset</a>
                 </form>
 
-                {{-- Only users allowed to create cases see this button --}}
                 @can('create', \App\Models\MedicalCase::class)
                     <a href="{{ route('cases.create') }}"
                        class="inline-block mb-4 px-4 py-2 bg-indigo-600 text-white rounded-md">+ New Case</a>
                 @endcan
 
-                {{-- overflow-x-auto lets the table scroll sideways on a phone --}}
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-left text-sm">
                         <thead>
@@ -87,7 +83,6 @@
                     </table>
                 </div>
 
-                {{-- Page links (10 cases per page) --}}
                 <div class="mt-4">
                     {{ $cases->links() }}
                 </div>

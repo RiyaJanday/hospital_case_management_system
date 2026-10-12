@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MedicalCaseFactory extends Factory
 {
-    // Describes what one fake (dummy) case looks like.
     public function definition(): array
     {
         return [

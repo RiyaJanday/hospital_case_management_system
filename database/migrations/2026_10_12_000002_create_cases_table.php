@@ -9,16 +9,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cases', function (Blueprint $table) {
-            $table->id();                                  // auto-increment ID
-            $table->string('case_number')->unique();       // unique index
-            $table->string('patient_reference');           // dummy code, not a real name
+            $table->id();
+            $table->string('case_number')->unique();
+            $table->string('patient_reference');
             $table->string('surgeon_name');
             $table->string('implant_type');
-            $table->string('status')->index();             // index for faster filtering
+            $table->string('status')->index();
             $table->string('priority');
-            $table->date('surgery_date')->nullable();      // optional
-            $table->foreignId('created_by')->constrained('users'); // foreign key to users.id
-            $table->timestamps();                          // created_at and updated_at
+            $table->date('surgery_date')->nullable();
+            $table->foreignId('created_by')->constrained('users');
+            $table->timestamps();
         });
     }
 

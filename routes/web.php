@@ -9,11 +9,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Everything inside this group needs a logged-in user (guests go to /login).
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // One line creates index, create, store, show, edit, update, destroy routes.
     Route::resource('cases', MedicalCaseController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

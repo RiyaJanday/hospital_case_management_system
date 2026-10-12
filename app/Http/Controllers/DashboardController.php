@@ -8,7 +8,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Each count() asks MySQL to count the matching rows.
         $totalCases = MedicalCase::count();
         $planningCases = MedicalCase::where('status', 'Planning')->count();
         $inReviewCases = MedicalCase::where('status', 'In Review')->count();
